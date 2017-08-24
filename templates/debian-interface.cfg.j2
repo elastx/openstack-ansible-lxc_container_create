@@ -16,7 +16,7 @@ iface {{ item.value.interface }} inet static
     post-up ip link set $IFACE address $(cat /sys/class/net/$IFACE/address)
 {% if item.value.static_routes is defined %}
 {% for route in item.value.static_routes %}
-    post-up ip route add {{ route['cidr'] }} via {{ route['gateway'] }} || true
+    post-up ip route add {{ route['cidr'] }} via {{ route['gateway'] }} dev {{ item.value.interface }} || true
 {% endfor %}
 {% endif %}
 {% else %}
