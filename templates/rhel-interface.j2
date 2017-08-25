@@ -2,7 +2,7 @@
 
 ### start generated network for [ {{ item.value.interface }} ] ###
 DEVICE={{ item.value.interface }}
-BOOTPROTO=none
+BOOTPROTO={% if item.value.dhcp is True %}dhcp{% else %}none{% endif %}
 ONBOOT=yes
 NM_CONTROLLED=no
 TYPE=Ethernet
