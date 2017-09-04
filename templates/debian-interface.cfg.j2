@@ -2,9 +2,10 @@
 
 ### start generated network for [ {{ item.value.interface }} ] ###
 auto {{ item.value.interface }}
-{% if (item.value.address is defined or item.value.dhcp is defined) %}
-iface {{ item.value.interface }} inet {% if item.value.dhcp is True %}dhcp{% else %}static{% endif %}
-{% if (item.value.address is defined and not item.value.dhcp is True) %}
+{% if item.value.address is defined or item.value.dhcp is defined %}
+iface {{ item.value.interface }} inet {% if item.value.dhcp is defined and item.value.dhcp %}dhcp{% else %}static{% endif %}
+
+{% if item.value.address is defined %}
     address {{ item.value.address }}
     netmask {{ item.value.netmask }}
 {% if item.value.gateway is defined %}
