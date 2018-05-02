@@ -4,13 +4,12 @@
 auto {{ item.value.interface }}
 {% if item.value.address is defined or item.value.dhcp is defined %}
 iface {{ item.value.interface }} inet {% if item.value.dhcp is defined and item.value.dhcp %}dhcp{% else %}static{% endif %}
-{% if item.value.address is defined %}
-iface {{ item.value.interface }} inet static
+{%   if item.value.address is defined %}
     address {{ item.value.address }}
     netmask {{ item.value.netmask }}
-{%   if item.value.gateway is defined %}
+{%     if item.value.gateway is defined %}
     gateway {{ item.value.gateway }}
-{%   endif %}
+{%     endif %}
 {%   endif %}
     mtu {{ item.value.mtu|default(lxc_container_default_mtu) }}
     # needed to enable gratuitous arps on interface events
