@@ -4,6 +4,7 @@
 auto {{ item.value.interface }}
 {% if item.value.address is defined or item.value.dhcp is defined %}
 iface {{ item.value.interface }} inet {% if item.value.dhcp is defined and item.value.dhcp %}dhcp{% else %}static{% endif %}
+
 {%   if item.value.address is defined %}
     address {{ item.value.address }}
     netmask {{ item.value.netmask }}
